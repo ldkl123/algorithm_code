@@ -29,7 +29,8 @@ int find_max(vector<int> q);
 int main(){
     // variables
     int n=0, K=0, n_k=0, ans=0;
-    int b=0, s=0, margin=0;;
+    int b=0, s=0, margin=0;
+    int count=0;
     vector<int> paper;
     
     // get input and sort
@@ -56,18 +57,17 @@ int main(){
     int n_copy = n;
     for(int i=s; i<=b; i++){  
         int j=n-n_copy;
-        int count=0;
-
+        
         K = i;
         n_k = n-K;
         while(j < n_copy){
-            if(compare_k(K, paper[j])){
-                n_copy--;                     
+            if(compare_k(K, paper[j])){                  
                 break;
             }
             count++;
             j++;                      // j have to be increase to get out while loop
         }
+        n_copy--; 
         cout << "K: " << K << "  margin: " << margin << endl;
         cout << "n-count: " << n-count << " count+1: " << count+1<<endl;
         if (n-count >=K && n_k <= count){
