@@ -13,6 +13,7 @@ int y_move[4] = {0, 0, -1, 1};
 int tomato[1001][1001] = {0,};
 bool v[1001][1001] = {0,};
 int cnt=0;
+bool init_flag=false;
 queue<vector<int> > q; 
 int main(){
     int N=0, M=0;
@@ -27,16 +28,17 @@ int main(){
         for(int j=0; j<s.size(); j++){
             if(s[j] != ' '){
                 if(minus){
-                    tomato[i][j-margin] = -(s[j]-'0');
+                    tomato[i][j-margin] =  -s[j]+'0';
                     minus = false;
-                    cout << tomato[i][j-margin]<<endl;
-                }
-                if(s[j] == '-'){
-                    margin++; 
-                    minus = true;
                 }
                 else{
-                    tomato[i][j-margin] = s[j]-'0';
+                    if(s[j] == '-'){
+                        margin++; 
+                        minus = true;
+                    }
+                    else{
+                        tomato[i][j-margin] = s[j]-'0';
+                    }
                 }
             }
             else{
@@ -44,15 +46,9 @@ int main(){
             }
         }
     }
-    for(int i=0; i<N; i++){
-        for(int j=0; j<M; j++){
-            cout << tomato[i][j] << " ";
-        }
-        cout << endl;
-    }
+    
     check_tomato(N, M);
     if(q.empty()){
-        cout << "empty" << endl;
         cout<< -1 << endl;
         return 0;
     }
@@ -64,12 +60,7 @@ int main(){
         
         cout << -1 << endl;
     }
-    for(int i=0; i<N; i++){
-        for(int j=0; j<M; j++){
-            cout << tomato[i][j] << " ";
-        }
-        cout << endl;
-    }
+    
 }
 void check_tomato(int N, int M){
     for(int i=0; i<N; i++){
@@ -81,6 +72,9 @@ void check_tomato(int N, int M){
                p.push_back(0);
                q.push(p); 
                v[i][j]=true;
+            if(tomato[i][j] == 0){
+                init_flag = true;
+            }
            } 
         }
     }
@@ -92,7 +86,7 @@ void BFS(int N, int M){
        cnt = q.front()[2];
        q.pop();
        for(int i=0; i<4; i++){
-           if(x+x_move[i] > N || x+x_move[i] < 0 || y+y_move[i] > M || y+y_move[i] < 0){
+           if(x+x_move[i] >= N || x+x_move[i] < 0 || y+y_move[i] >= M || y+y_move[i] < 0){
                continue;
            }
            if(tomato[x+x_move[i]][y+y_move[i]] == 0 && v[x+x_move[i]][y+y_move[i]] == false ){
