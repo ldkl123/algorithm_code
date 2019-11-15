@@ -11,6 +11,7 @@
 using namespace std;
 
 int main(){
+    float i = sqrt(11339);
     cout << sqrt(11339) << endl;
-    cout << 106*106 << endl;
+    cout << 106*106 == i << endl;
 }
