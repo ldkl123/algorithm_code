@@ -71,12 +71,12 @@ void print_out2(int n, int m){
     }
 }
 void make_map(pair<int, int> d1, pair<int, int> d2){
-    queue<pair<int, int> t> q;
+    queue<pair<int, int> > q;
     q.push(d1);
     q.push(d2);
     while(!q.empty()){
-        int x = q.front().x;
-        int y = q.front().y;
+        int x = q.front().first;
+        int y = q.front().second;
         q.pop();
         for(int i=0; i<4; i++){
             int _x = x+x_move[i]; 
